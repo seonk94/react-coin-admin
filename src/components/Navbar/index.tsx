@@ -1,7 +1,8 @@
 import React from 'react';
+import { NavHeader } from './css';
 
-function App() {
-	return <nav></nav>;
+function Navbar() {
+	return <NavHeader />;
 }
 
-export default App;
+export default Navbar;
