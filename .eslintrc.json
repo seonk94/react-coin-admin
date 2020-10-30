@@ -27,6 +27,12 @@
         "ts": "never",
         "tsx": "never"
       }
+    ],
+    "prettier/prettier": [
+      1,
+      {
+        "endOfLine": "auto"
+      }
     ]
   },
   "overrides": [
