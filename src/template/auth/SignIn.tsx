@@ -1,17 +1,27 @@
 import React from 'react';
-import { signInWithGoogle } from '../../utils/firebase';
+import { useHistory } from 'react-router-dom';
+import { auth, googleProvider } from '../../utils/firebase';
 import { AuthContainer, AuthSection } from './css';
 
 function SignIn() {
+	const history = useHistory();
 	const handlerGoogleSignIn = () => {
-		signInWithGoogle();
+		auth
+			.signInWithPopup(googleProvider)
+			.then(() => {
+				history.push({
+					pathname: '/',
+				});
+			})
+			.catch((error) => {
+				throw Error(error.message);
+			});
 	};
 	return (
 		<AuthContainer>
 			<AuthSection>
-				google!!
 				<button onClick={handlerGoogleSignIn} type="button">
-					google button
+					Google Login
 				</button>
 			</AuthSection>
 		</AuthContainer>
