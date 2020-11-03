@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { UserContext } from '../../provider/UserProvider';
 import { auth, googleProvider } from '../../utils/firebase';
 import { AuthContainer, AuthSection } from './css';
 
 function SignIn() {
 	const history = useHistory();
+	const userContext = useContext(UserContext);
+
 	const handlerGoogleSignIn = () => {
 		auth
 			.signInWithPopup(googleProvider)
-			.then(() => {
-				history.push({
-					pathname: '/',
-				});
+			.then((res) => {
+				if (userContext.setUser) {
+					userContext.setUser(res.user);
+					history.push({
+						pathname: '/',
+					});
+				}
 			})
 			.catch((error) => {
 				throw Error(error.message);
