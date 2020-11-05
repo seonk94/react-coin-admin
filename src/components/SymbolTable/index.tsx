@@ -1,27 +1,36 @@
 import React from 'react';
-import { Table, TableContainer } from './css';
+import { ICoinData } from '../../types';
+import { Table, TableContainer, Td, TdImage, Tr } from './css';
 
-function SymbolTable() {
+interface Props {
+	listData: ICoinData[];
+}
+
+function SymbolTable({ listData }: Props) {
 	return (
 		<TableContainer>
 			<Table>
 				<thead>
 					<tr>
-						<th>th1</th>
-						<th>th2</th>
-						<th>th3</th>
-						<th>th4</th>
-						<th>th5</th>
+						<Tr>Logo</Tr>
+						<Tr>Name</Tr>
+						<Tr>Symbol</Tr>
+						<Tr>th4</Tr>
+						<Tr>th5</Tr>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>th1</td>
-						<td>th2</td>
-						<td>th3</td>
-						<td>th4</td>
-						<td>th5</td>
-					</tr>
+					{listData.map((data) => (
+						<tr>
+							<TdImage>
+								<img src={data.img} alt={data.symbol} />
+							</TdImage>
+							<Td>{data.name}</Td>
+							<Td>{data.symbol}</Td>
+							<Td>th4</Td>
+							<Td>th5</Td>
+						</tr>
+					))}
 				</tbody>
 			</Table>
 		</TableContainer>

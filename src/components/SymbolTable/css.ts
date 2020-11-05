@@ -11,19 +11,31 @@ const Table = styled.table`
 
 	thead {
 		border: 1px solid #ddd;
-		th {
-			border: 1px solid #ddd;
-			padding: 12px;
-		}
 	}
 
 	tbody {
 		border: 1px solid #ddd;
-		td {
-			border: 1px solid #ddd;
-			padding: 12px;
-		}
 	}
 `;
 
-export { Table, TableContainer };
+const Tr = styled.th`
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	padding: 12px;
+`;
+
+const Td = styled.td`
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	padding: 12px;
+`;
+
+const TdImage = styled(Td)`
+	text-align: center;
+	img {
+		width: 32px;
+		height: 32px;
+	}
+`;
+
+export { Table, TableContainer, Tr, Td, TdImage };
