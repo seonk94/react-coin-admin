@@ -1,12 +1,15 @@
 import React from 'react';
 import { ICoinData } from '../../types';
-import { Table, TableContainer, Td, TdImage, Tr } from './css';
+import { Table, TableContainer, Tr } from './css';
+import TableRow from './TableRow';
 
 interface Props {
-	listData: ICoinData[];
+	coinList: ICoinData[];
+	removeCoin: (coin: ICoinData) => void;
+	updateCoin: (coin: ICoinData) => void;
 }
 
-function SymbolTable({ listData }: Props) {
+function SymbolTable({ coinList, removeCoin, updateCoin }: Props) {
 	return (
 		<TableContainer>
 			<Table>
@@ -15,21 +18,13 @@ function SymbolTable({ listData }: Props) {
 						<Tr>Logo</Tr>
 						<Tr>Name</Tr>
 						<Tr>Symbol</Tr>
-						<Tr>th4</Tr>
-						<Tr>th5</Tr>
+						<Tr>Status</Tr>
+						<Tr>Controls</Tr>
 					</tr>
 				</thead>
 				<tbody>
-					{listData.map((data) => (
-						<tr>
-							<TdImage>
-								<img src={data.img} alt={data.symbol} />
-							</TdImage>
-							<Td>{data.name}</Td>
-							<Td>{data.symbol}</Td>
-							<Td>th4</Td>
-							<Td>th5</Td>
-						</tr>
+					{coinList.map((data) => (
+						<TableRow data={data} removeCoin={removeCoin} updateCoin={updateCoin} />
 					))}
 				</tbody>
 			</Table>
