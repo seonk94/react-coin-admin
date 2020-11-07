@@ -8,6 +8,8 @@ const NavHeader = styled.header`
 	border-bottom-width: 1px;
 	height: ${NavbarHeight - 1}px;
 	width: 100%;
+	display: flex;
+	align-items: center;
 `;
 
 export { NavHeader };
