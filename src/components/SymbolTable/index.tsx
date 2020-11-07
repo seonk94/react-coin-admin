@@ -24,7 +24,7 @@ function SymbolTable({ coinList, removeCoin, updateCoin }: Props) {
 				</thead>
 				<tbody>
 					{coinList.map((data) => (
-						<TableRow data={data} removeCoin={removeCoin} updateCoin={updateCoin} />
+						<TableRow data={data} removeCoin={removeCoin} updateCoin={updateCoin} key={data.symbol} />
 					))}
 				</tbody>
 			</Table>
