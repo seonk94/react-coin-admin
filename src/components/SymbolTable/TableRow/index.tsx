@@ -1,8 +1,8 @@
 import React from 'react';
-import { faRunning, faStopCircle } from '@fortawesome/free-solid-svg-icons';
+import { faRunning, faStopCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ICoinData } from '../../../types';
-import { Td, TdImage } from '../css';
+import { Td, TdImage, TdIcons } from '../css';
 
 interface Props {
 	data: ICoinData;
@@ -27,16 +27,16 @@ function TableRow({ data, removeCoin, updateCoin }: Props) {
 			</TdImage>
 			<Td>{data.name}</Td>
 			<Td>{data.symbol}</Td>
-			<Td>
+			<TdIcons>
 				<button type="button" onClick={handleRunning}>
 					<FontAwesomeIcon icon={data.running ? faRunning : faStopCircle} />
 				</button>
-			</Td>
-			<Td>
+			</TdIcons>
+			<TdIcons>
 				<button type="button" onClick={handleRemoveCoin}>
-					remove
+					<FontAwesomeIcon icon={faTrashAlt} />
 				</button>
-			</Td>
+			</TdIcons>
 		</tr>
 	);
 }

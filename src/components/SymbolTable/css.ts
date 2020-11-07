@@ -38,4 +38,8 @@ const TdImage = styled(Td)`
 	}
 `;
 
-export { Table, TableContainer, Tr, Td, TdImage };
+const TdIcons = styled(Td)`
+	text-align: center;
+`;
+
+export { Table, TableContainer, Tr, Td, TdImage, TdIcons };
