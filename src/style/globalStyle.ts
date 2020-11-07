@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   html {
@@ -8,4 +8,8 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
     margin: 0px !important;
   }
+`;
+
+export const Spacer = styled.div`
+	flex-grow: 1;
 `;
