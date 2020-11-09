@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { Button } from 'semantic-ui-react';
 import { Spacer } from '../../style/globalStyle';
 import { NavHeader } from './css';
 
@@ -12,9 +13,9 @@ function Navbar() {
 	return (
 		<NavHeader>
 			<Spacer />
-			<button type="button" onClick={handleLogin}>
-				login
-			</button>
+			<Button onClick={handleLogin} primary>
+				Login
+			</Button>
 		</NavHeader>
 	);
 }
