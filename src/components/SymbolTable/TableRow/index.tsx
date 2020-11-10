@@ -19,7 +19,7 @@ function TableRow({ data, removeCoin, updateCoin }: Props) {
 	};
 
 	return (
-		<Table.Row>
+		<Table.Row positive={data.running}>
 			<Table.Cell>
 				<Image src={data.img} avatar />
 			</Table.Cell>
@@ -27,7 +27,7 @@ function TableRow({ data, removeCoin, updateCoin }: Props) {
 			<Table.Cell>{data.symbol}</Table.Cell>
 			<Table.Cell>
 				<Button primary size="mini" icon onClick={handleRunning}>
-					<Icon name={data.running ? 'play' : 'stop'} />
+					<Icon name={data.running ? 'stop' : 'play'} />
 				</Button>
 			</Table.Cell>
 			<Table.Cell>
