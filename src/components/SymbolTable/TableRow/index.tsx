@@ -1,8 +1,6 @@
 import React from 'react';
-import { faRunning, faStopCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Table, Image, Button, Icon } from 'semantic-ui-react';
 import { ICoinData } from '../../../types';
-import { Td, TdImage, TdIcons } from '../css';
 
 interface Props {
 	data: ICoinData;
@@ -21,23 +19,23 @@ function TableRow({ data, removeCoin, updateCoin }: Props) {
 	};
 
 	return (
-		<tr>
-			<TdImage>
-				<img src={data.img} alt={data.symbol} />
-			</TdImage>
-			<Td>{data.name}</Td>
-			<Td>{data.symbol}</Td>
-			<TdIcons>
-				<button type="button" onClick={handleRunning}>
-					<FontAwesomeIcon icon={data.running ? faRunning : faStopCircle} />
-				</button>
-			</TdIcons>
-			<TdIcons>
-				<button type="button" onClick={handleRemoveCoin}>
-					<FontAwesomeIcon icon={faTrashAlt} />
-				</button>
-			</TdIcons>
-		</tr>
+		<Table.Row>
+			<Table.Cell>
+				<Image src={data.img} avatar />
+			</Table.Cell>
+			<Table.Cell>{data.name}</Table.Cell>
+			<Table.Cell>{data.symbol}</Table.Cell>
+			<Table.Cell>
+				<Button primary size="mini" icon onClick={handleRunning}>
+					<Icon name={data.running ? 'play' : 'stop'} />
+				</Button>
+			</Table.Cell>
+			<Table.Cell>
+				<Button primary size="mini" icon onClick={handleRemoveCoin}>
+					<Icon name="delete" />
+				</Button>
+			</Table.Cell>
+		</Table.Row>
 	);
 }
 export default TableRow;

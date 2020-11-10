@@ -1,6 +1,7 @@
 import React from 'react';
+import { Table } from 'semantic-ui-react';
 import { ICoinData } from '../../types';
-import { Table, TableContainer, Tr } from './css';
+import { TableContainer } from './css';
 import TableRow from './TableRow';
 
 interface Props {
@@ -13,20 +14,11 @@ function SymbolTable({ coinList, removeCoin, updateCoin }: Props) {
 	return (
 		<TableContainer>
 			<Table>
-				<thead>
-					<tr>
-						<Tr>Logo</Tr>
-						<Tr>Name</Tr>
-						<Tr>Symbol</Tr>
-						<Tr>Status</Tr>
-						<Tr>Controls</Tr>
-					</tr>
-				</thead>
-				<tbody>
+				<Table.Body>
 					{coinList.map((data) => (
-						<TableRow data={data} removeCoin={removeCoin} updateCoin={updateCoin} key={data.symbol} />
+						<TableRow data={data} removeCoin={removeCoin} updateCoin={updateCoin} />
 					))}
-				</tbody>
+				</Table.Body>
 			</Table>
 		</TableContainer>
 	);
