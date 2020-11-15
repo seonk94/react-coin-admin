@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'semantic-ui-react';
+import { Button, Icon, Table } from 'semantic-ui-react';
 import { ICoinData } from '../../types';
 import { TableContainer } from './css';
 import TableRow from './TableRow';
@@ -25,6 +25,16 @@ function SymbolTable({ coinList, removeCoin, updateCoin }: Props) {
 						<TableRow data={data} removeCoin={removeCoin} updateCoin={updateCoin} />
 					))}
 				</Table.Body>
+				<Table.Footer fullWidth>
+					<Table.Row>
+						<Table.HeaderCell colSpan="5">
+							<Button secondary icon labelPosition="left" floated="right">
+								<Icon name="add circle" />
+								Add Symbol
+							</Button>
+						</Table.HeaderCell>
+					</Table.Row>
+				</Table.Footer>
 			</Table>
 		</TableContainer>
 	);
