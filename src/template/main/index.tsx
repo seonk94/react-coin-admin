@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Grid } from 'semantic-ui-react';
 import SymbolTable from '../../components/SymbolTable';
 import { ICoinData } from '../../types';
 import { MainTemplateContainer } from './css';
@@ -29,7 +30,13 @@ function MainTemplate() {
 
 	return (
 		<MainTemplateContainer>
-			<SymbolTable updateCoin={updateCoin} removeCoin={removeCoin} coinList={coinList} />
+			<Grid container>
+				<Grid.Row>
+					<Grid.Column width={3} mobile={16}>
+						<SymbolTable updateCoin={updateCoin} removeCoin={removeCoin} coinList={coinList} />
+					</Grid.Column>
+				</Grid.Row>
+			</Grid>
 		</MainTemplateContainer>
 	);
 }
