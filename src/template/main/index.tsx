@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Grid } from 'semantic-ui-react';
+import Stat from '../../components/Stat';
 import SymbolTable from '../../components/SymbolTable';
 import { ICoinData } from '../../types';
 import { MainTemplateContainer } from './css';
@@ -31,6 +32,14 @@ function MainTemplate() {
 	return (
 		<MainTemplateContainer>
 			<Grid container>
+				<Grid.Row>
+					<Grid.Column width={1} mobile={16} computer={4}>
+						<Stat title="USDT" data="12,657" />
+					</Grid.Column>
+					<Grid.Column width={2} mobile={16} computer={8}>
+						Chart
+					</Grid.Column>
+				</Grid.Row>
 				<Grid.Row>
 					<Grid.Column width={3} mobile={16}>
 						<SymbolTable updateCoin={updateCoin} removeCoin={removeCoin} coinList={coinList} />
