@@ -2,6 +2,9 @@ import styled from 'styled-components';
 
 const StatCard = styled.div`
 	position: relative;
+	padding: 12px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
 `;
 
 const StatTitle = styled.dt`
