@@ -1,4 +1,4 @@
-export interface ICoinData {
+export interface ICoin {
 	symbol: string;
 	name: string;
 	img: string;

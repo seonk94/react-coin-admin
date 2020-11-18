@@ -1,11 +1,11 @@
 import React from 'react';
 import { Table, Image, Button, Icon } from 'semantic-ui-react';
-import { ICoinData } from '../../../types';
+import { ICoin } from '../../../types';
 
 interface Props {
-	data: ICoinData;
-	removeCoin: (coin: ICoinData) => void;
-	updateCoin: (coin: ICoinData) => void;
+	data: ICoin;
+	removeCoin: (coin: ICoin) => void;
+	updateCoin: (coin: ICoin) => void;
 }
 function TableRow({ data, removeCoin, updateCoin }: Props) {
 	const handleRemoveCoin = () => {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Grid } from 'semantic-ui-react';
 import Stat from '../../components/Stat';
 import SymbolTable from '../../components/SymbolTable';
-import { ICoinData } from '../../types';
+import { ICoin } from '../../types';
 import { MainTemplateContainer } from './css';
 
 function MainTemplate() {
@@ -21,11 +21,11 @@ function MainTemplate() {
 		},
 	]);
 
-	const updateCoin = (data: ICoinData) => {
+	const updateCoin = (data: ICoin) => {
 		setCoinList(coinList.map((coin) => (coin.symbol === data.symbol ? data : coin)));
 	};
 
-	const removeCoin = (data: ICoinData) => {
+	const removeCoin = (data: ICoin) => {
 		setCoinList(coinList.filter((coin) => coin.symbol !== data.symbol));
 	};
 

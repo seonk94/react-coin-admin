@@ -1,13 +1,13 @@
 import React from 'react';
 import { Button, Icon, Table } from 'semantic-ui-react';
-import { ICoinData } from '../../types';
+import { ICoin } from '../../types';
 import { TableContainer } from './css';
 import TableRow from './TableRow';
 
 interface Props {
-	coinList: ICoinData[];
-	removeCoin: (coin: ICoinData) => void;
-	updateCoin: (coin: ICoinData) => void;
+	coinList: ICoin[];
+	removeCoin: (coin: ICoin) => void;
+	updateCoin: (coin: ICoin) => void;
 }
 
 function SymbolTable({ coinList, removeCoin, updateCoin }: Props) {
