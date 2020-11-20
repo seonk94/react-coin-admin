@@ -1,17 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import App from './App';
 import UserProvider from './provider/UserProvider';
 import reportWebVitals from './reportWebVitals';
 import { GlobalStyle } from './style/globalStyle';
+import configureStore from './store/configureStore';
+
+const store = configureStore();
 
 ReactDOM.render(
-	<React.StrictMode>
-		<UserProvider>
-			<App />
-		</UserProvider>
-		<GlobalStyle />
-	</React.StrictMode>,
+	<Provider store={store}>
+		<React.StrictMode>
+			<UserProvider>
+				<App />
+			</UserProvider>
+			<GlobalStyle />
+		</React.StrictMode>
+	</Provider>,
 	document.getElementById('root')
 );
 
