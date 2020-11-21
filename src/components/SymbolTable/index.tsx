@@ -22,7 +22,7 @@ function SymbolTable({ coinList, removeCoin, updateCoin }: Props) {
 				</Table.Header>
 				<Table.Body>
 					{coinList.map((data) => (
-						<TableRow data={data} removeCoin={removeCoin} updateCoin={updateCoin} />
+						<TableRow data={data} removeCoin={removeCoin} updateCoin={updateCoin} key={data.symbol} />
 					))}
 				</Table.Body>
 				<Table.Footer fullWidth>
