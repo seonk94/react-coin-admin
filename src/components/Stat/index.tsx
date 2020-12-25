@@ -7,16 +7,16 @@ interface Props {
 	help?: ReactElement | string | undefined;
 }
 function Stat({ title, data, help }: Props) {
-	return (
-		<StatCard>
-			<StatTitle>{title}</StatTitle>
-			<StatData>{data}</StatData>
-			<StatHelp>{help}</StatHelp>
-		</StatCard>
-	);
+  return (
+    <StatCard>
+      <StatTitle>{title}</StatTitle>
+      <StatData>{data}</StatData>
+      <StatHelp>{help}</StatHelp>
+    </StatCard>
+  );
 }
 export default Stat;
 
 Stat.defaultProps = {
-	help: undefined,
+  help : undefined
 };

@@ -6,19 +6,17 @@ import { RootState } from '../../reducers';
 import ApiTable from '../../components/ApiTable';
 
 function MainTemplate() {
-	const apis = useSelector((state: RootState) => state.api.apis);
+  const apis = useSelector((state: RootState) => state.api.apis);
 
-	return (
-		<MainTemplateContainer>
-			<Grid container>
-				<Grid.Row>
-					<Grid.Column mobile={16}>
-						<ApiTable apiList={apis} />
-					</Grid.Column>
-				</Grid.Row>
-			</Grid>
-		</MainTemplateContainer>
-	);
+  return (
+    <MainTemplateContainer>
+      <Grid container>
+        <Grid.Row>
+          <ApiTable apiList={apis} />
+        </Grid.Row>
+      </Grid>
+    </MainTemplateContainer>
+  );
 }
 
 export default MainTemplate;

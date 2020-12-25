@@ -10,15 +10,15 @@ import configureStore from './store/configureStore';
 const store = configureStore();
 
 ReactDOM.render(
-	<Provider store={store}>
-		<React.StrictMode>
-			<UserProvider>
-				<App />
-			</UserProvider>
-			<GlobalStyle />
-		</React.StrictMode>
-	</Provider>,
-	document.getElementById('root')
+  <Provider store={store}>
+    <React.StrictMode>
+      <UserProvider>
+        <App />
+      </UserProvider>
+      <GlobalStyle />
+    </React.StrictMode>
+  </Provider>,
+  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

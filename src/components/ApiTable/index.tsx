@@ -8,30 +8,31 @@ interface Props {
 }
 
 function ApiTable({ apiList }: Props) {
-	return (
-		<Table celled striped>
-			<Table.Header>
-				<Table.Row>
-					<Table.HeaderCell>Apikey</Table.HeaderCell>
-					<Table.HeaderCell>Secret</Table.HeaderCell>
-					<Table.HeaderCell>Indicator</Table.HeaderCell>
-					<Table.HeaderCell>Market</Table.HeaderCell>
-				</Table.Row>
-			</Table.Header>
-			<Table.Body>
-				{apiList.map((api) => (
-					<Table.Row>
-						<Table.Cell>{api.apiKey}</Table.Cell>
-						<Table.Cell>{api.secret}</Table.Cell>
-						<Table.Cell>
-							<IndicatorSelector api={api} />
-						</Table.Cell>
-						<Table.Cell>{api.market}</Table.Cell>
-					</Table.Row>
-				))}
-			</Table.Body>
-		</Table>
-	);
+  return (
+    <Table celled
+      striped>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell>Apikey</Table.HeaderCell>
+          <Table.HeaderCell>Secret</Table.HeaderCell>
+          <Table.HeaderCell>Indicator</Table.HeaderCell>
+          <Table.HeaderCell>Market</Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {apiList.map((api) => (
+          <Table.Row key={api.apiKey}>
+            <Table.Cell>{api.apiKey}</Table.Cell>
+            <Table.Cell>{api.secret}</Table.Cell>
+            <Table.Cell>
+              <IndicatorSelector api={api} />
+            </Table.Cell>
+            <Table.Cell>{api.market}</Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table>
+  );
 }
 
 export default ApiTable;
