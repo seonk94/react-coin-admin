@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import coin, { CoinState } from './coin';
+import api, { ApiState } from './api';
 
 export interface RootState {
-	coin: CoinState;
+	api: ApiState;
 }
 
 const rootReducer = combineReducers({
-	coin,
+	api,
 });
 
 export default rootReducer;
