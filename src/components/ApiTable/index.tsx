@@ -24,7 +24,7 @@ function ApiTable({ apiList }: Props) {
 						<Table.Cell>{api.apiKey}</Table.Cell>
 						<Table.Cell>{api.secret}</Table.Cell>
 						<Table.Cell>
-							<IndicatorSelector />
+							<IndicatorSelector api={api} />
 						</Table.Cell>
 						<Table.Cell>{api.market}</Table.Cell>
 					</Table.Row>

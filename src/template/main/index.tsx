@@ -7,7 +7,6 @@ import ApiTable from '../../components/ApiTable';
 
 function MainTemplate() {
 	const apis = useSelector((state: RootState) => state.api.apis);
-	// const dispatch = useDispatch();
 
 	return (
 		<MainTemplateContainer>

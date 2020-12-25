@@ -1,8 +1,19 @@
 import React, { useState } from 'react';
-import { Button, Dropdown, Grid, Modal } from 'semantic-ui-react';
+import { useDispatch } from 'react-redux';
+import { Button, Dropdown, DropdownProps, Grid, Modal } from 'semantic-ui-react';
+import { UPDATE_API } from '../../../actions/api';
+import { IApi } from '../../../types';
 
-function IndicatorSelector() {
+interface Props {
+	api: IApi;
+}
+function IndicatorSelector({ api }: Props) {
 	const [open, setOpen] = useState(false);
+	const [inputs, setInputs] = useState({
+		indicator: '',
+		period: '',
+	});
+	const dispatch = useDispatch();
 
 	const indicatorOptions = [
 		{ text: 'rsi', key: 'rsi', value: 'rsi' },
@@ -17,9 +28,31 @@ function IndicatorSelector() {
 		{ text: '4h', key: '4h', value: '4h' },
 		{ text: '1d', key: '1d', value: '1d' },
 	];
+
+	const handleSubmit = () => {
+		dispatch({
+			type: UPDATE_API,
+			payload: {
+				...api,
+				indicator: inputs.indicator,
+				period: inputs.period,
+			},
+		});
+		setOpen(false);
+	};
+
+	const onChange = (_e: React.SyntheticEvent<HTMLElement, Event>, data: DropdownProps) => {
+		const { value, name } = data;
+		setInputs({
+			...inputs,
+			[name]: value,
+		});
+	};
 	return (
 		<>
-			<Button onClick={() => setOpen(true)}>rsi - 4h</Button>
+			<Button onClick={() => setOpen(true)}>
+				{api.indicator} - {api.period}
+			</Button>
 			<Modal onClose={() => setOpen(false)} onOpen={() => setOpen(true)} open={open}>
 				<Modal.Header>Select indicator and period</Modal.Header>
 				<Modal.Content>
@@ -29,7 +62,14 @@ function IndicatorSelector() {
 								<p>Indicator</p>
 							</Grid.Column>
 							<Grid.Column width={12}>
-								<Dropdown fluid selection placeholder="indicator" options={indicatorOptions} />
+								<Dropdown
+									onChange={onChange}
+									fluid
+									name="indicator"
+									selection
+									placeholder="indicator"
+									options={indicatorOptions}
+								/>
 							</Grid.Column>
 						</Grid.Row>
 						<Grid.Row verticalAlign="middle">
@@ -37,13 +77,20 @@ function IndicatorSelector() {
 								<p>Period</p>
 							</Grid.Column>
 							<Grid.Column width={12}>
-								<Dropdown fluid selection placeholder="period" options={periodOptions} />
+								<Dropdown
+									onChange={onChange}
+									name="period"
+									fluid
+									selection
+									placeholder="period"
+									options={periodOptions}
+								/>
 							</Grid.Column>
 						</Grid.Row>
 					</Grid>
 				</Modal.Content>
 				<Modal.Actions>
-					<Button positive onClick={() => setOpen(false)}>
+					<Button positive onClick={handleSubmit}>
 						Confirm
 					</Button>
 				</Modal.Actions>
@@ -52,4 +99,4 @@ function IndicatorSelector() {
 	);
 }
 
-export default IndicatorSelector;
+export default React.memo(IndicatorSelector);
