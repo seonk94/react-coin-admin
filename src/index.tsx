@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import App from './App';
 import UserProvider from './provider/UserProvider';
 import reportWebVitals from './reportWebVitals';
 import { GlobalStyle } from './style/globalStyle';
 import configureStore from './store/configureStore';
+import Root from './routes';
+import 'semantic-ui-css/semantic.min.css';
 
 const store = configureStore();
 
@@ -13,7 +14,7 @@ ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
       <UserProvider>
-        <App />
+        <Root />
       </UserProvider>
       <GlobalStyle />
     </React.StrictMode>

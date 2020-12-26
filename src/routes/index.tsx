@@ -7,23 +7,28 @@ import MainTemplate from '../template/main';
 import AuthRoute from './AuthRoute';
 
 function Root() {
-  const { user } = useContext(UserContext);
+  const { user, loadingAuthState } = useContext(UserContext);
 
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Switch>
-        <AuthRoute exact
-          user={user}
-          path="/"
-          component={MainTemplate} />
-        <Route exact
-          path="/login"
-          component={SignIn} />
-        <Redirect path="*"
-          to="/" />
-      </Switch>
-    </BrowserRouter>
+    <>
+      { loadingAuthState
+        ? <h4>Loading...</h4>
+        : <BrowserRouter>
+          <Navbar />
+          <Switch>
+            <AuthRoute exact
+              user={user}
+              path="/"
+              component={MainTemplate} />
+            <Route exact
+              path="/login"
+              component={SignIn} />
+            <Redirect path="*"
+              to="/" />
+          </Switch>
+        </BrowserRouter>
+      }
+    </>
   );
 }
 export default Root;
