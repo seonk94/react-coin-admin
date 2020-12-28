@@ -1,8 +1,8 @@
 export interface IApi {
-	apiKey: string;
+  uid: string;
+	api_key: string;
 	secret: string;
 	market: string;
-	userId: string;
 	indicator?: string;
 	period?: string;
 }
