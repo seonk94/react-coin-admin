@@ -50,10 +50,13 @@ function IndicatorSelector({ api }: Props) {
   };
   return (
     <>
-      <Button onClick={() => setOpen(true)}>
+      <Button size="small"
+        primary
+        onClick={() => setOpen(true)}>
         {api.indicator} - {api.period}
       </Button>
       <Modal onClose={() => setOpen(false)}
+        size="mini"
         onOpen={() => setOpen(true)}
         open={open}>
         <Modal.Header>Select indicator and period</Modal.Header>
