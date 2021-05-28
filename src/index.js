@@ -1,16 +1,57 @@
-const Koa = require('koa');
-const Router = require('koa-router');
+const { ApolloServer, PubSub, gql } = require('apollo-server');
+const pubsub = new PubSub();
+const PORT = 4000;
 
-const app = new Koa();
-const router = new Router();
+// Schema definition
+const typeDefs = gql`
+  type Query {
+    currentNumber: Int
+  }
 
-router.get('/', (ctx, next) => {
-    ctx.body = '홈';
+  type Subscription {
+    numberIncremented: Int
+  }
+`;
+
+// Resolver map
+const resolvers = {
+  Query: {
+    currentNumber() {
+      return currentNumber;
+    }
+  },
+  Subscription: {
+    numberIncremented: {
+      subscribe: () => pubsub.asyncIterator(['NUMBER_INCREMENTED'])
+    }
+  }
+};
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  subscriptions: {
+    path: '/subscriptions',
+    onConnect: (connectionParams, webSocket, context) => {
+      console.log('Client connected');
+    },
+    onDisconnect: (webSocket, context) => {
+      console.log('Client disconnected');
+    }
+  }
 });
 
-app.use(router.routes());
-app.use(router.allowedMethods());
+let currentNumber = 0;
+function incrementNumber() {
+  currentNumber++;
+  pubsub.publish('NUMBER_INCREMENTED', { numberIncremented: currentNumber });
+  setTimeout(incrementNumber, 1000);
+}
 
-app.listen(4000, () => {
-    console.log('server is listening to port 4000');
+server.listen().then(({ url }) => {
+  console.log(`🚀 Subscription endpoint ready at ws://localhost:${PORT}${server.subscriptionsPath}`);
+  console.log('Query at studio.apollographql.com/dev');
 });
+
+// Start incrementing
+incrementNumber();
