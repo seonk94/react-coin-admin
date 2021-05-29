@@ -1,31 +1,9 @@
-const { ApolloServer, PubSub, gql } = require('apollo-server');
-const pubsub = new PubSub();
+const { ApolloServer } = require('apollo-server');
+
 const PORT = 4000;
 
-// Schema definition
-const typeDefs = gql`
-  type Query {
-    currentNumber: Int
-  }
-
-  type Subscription {
-    numberIncremented: Int
-  }
-`;
-
-// Resolver map
-const resolvers = {
-  Query: {
-    currentNumber() {
-      return currentNumber;
-    }
-  },
-  Subscription: {
-    numberIncremented: {
-      subscribe: () => pubsub.asyncIterator(['NUMBER_INCREMENTED'])
-    }
-  }
-};
+const typeDefs = require('./schema');
+const resolvers = require('./resolvers');
 
 const server = new ApolloServer({
   typeDefs,
@@ -41,17 +19,9 @@ const server = new ApolloServer({
   }
 });
 
-let currentNumber = 0;
-function incrementNumber() {
-  currentNumber++;
-  pubsub.publish('NUMBER_INCREMENTED', { numberIncremented: currentNumber });
-  setTimeout(incrementNumber, 1000);
-}
-
 server.listen().then(({ url }) => {
   console.log(`🚀 Subscription endpoint ready at ws://localhost:${PORT}${server.subscriptionsPath}`);
   console.log('Query at studio.apollographql.com/dev');
 });
 
-// Start incrementing
-incrementNumber();
+
