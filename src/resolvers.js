@@ -1,35 +1,42 @@
 const { pubsub } = require('./subscriptions');
+const { User, Room } = require('./mongo/models');
 
 let currentNumber = 0;
 function incrementNumber() {
   currentNumber++;
   pubsub.publish('NUMBER_INCREMENTED', { numberIncremented: currentNumber });
-  setTimeout(incrementNumber, 1000);
+  setTimeout(incrementNumber, 10000);
 }
 incrementNumber();
-
-const users = [
-  { id: 1, name: 'a' },
-  { id: 2, name: 'b' }
-];
 
 module.exports = {
   Query: {
     currentNumber() {
       return currentNumber;
     },
-    users() {
+    users: async (_, args) => {
+      const users = await User.find();
       return users;
+    },
+    rooms: async (_, args) => {
+      const rooms = await Room.find();
+      return rooms;
     }
   },
   Mutation: {
-    createUser: (parent, args, context, info) => {
-      const newUser = { ...args };
-      users.push(newUser);
-      return args;
+    createUser: async (parent, args, context, info) => {
+      const user = new User({
+        ...args.userInput
+      });
+      const result = await user.save();
+      return result;
     },
-    createRoom: (parent, args, context, info) => {
-      return args;
+    createRoom: async (parent, args, context, info) => {
+      const room = new Room({
+        ...args.roomInput
+      });
+      const result = await room.save();
+      return result;
     }
   },
   Subscription: {

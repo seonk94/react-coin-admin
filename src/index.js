@@ -1,6 +1,8 @@
 const { ApolloServer } = require('apollo-server');
-
+const clientConnect = require('./mongo');
 const PORT = 4000;
+
+clientConnect();
 
 const typeDefs = require('./schema');
 const resolvers = require('./resolvers');
@@ -21,7 +23,7 @@ const server = new ApolloServer({
 
 server.listen().then(({ url }) => {
   console.log(`🚀 Subscription endpoint ready at ws://localhost:${PORT}${server.subscriptionsPath}`);
-  console.log('Query at studio.apollographql.com/dev');
+  console.log(`🚀 Apollo Server ready at ${url}`);
 });
 
 

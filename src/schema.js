@@ -3,12 +3,12 @@ const { gql } = require('apollo-server');
 // Schema definition
 const typeDefs = gql`
   type User {
-    id: Int!
+    _id: String
     name: String!
   }
 
   type Room {
-    id: Int!
+    _id: String
     name: String!
     users: [User]
   }
@@ -20,10 +20,16 @@ const typeDefs = gql`
     rooms: [Room]
     room: Room
   }
+  input UserInput {
+    name: String
+  }
+  input RoomInput {
+    name: String
+  }
 
   type Mutation {
-    createUser(id: Int, name: String): User
-    createRoom(id: Int, name: String): Room
+    createUser(userInput: UserInput): User
+    createRoom(roomInput: RoomInput): Room
   }
 
   type Subscription {
