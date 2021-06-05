@@ -14,6 +14,10 @@ module.exports = {
     currentNumber() {
       return currentNumber;
     },
+    user: async (_, args) => {
+      const user = await User.findOne({ uid: args.uid });
+      return user;
+    },
     users: async (_, args) => {
       const users = await User.find();
       return users;
@@ -21,10 +25,17 @@ module.exports = {
     rooms: async (_, args) => {
       const rooms = await Room.find();
       return rooms;
+    },
+    mindMessage: () => {
+      return {
+        emoji: '❤'
+      };
     }
   },
   Mutation: {
     createUser: async (parent, args, context, info) => {
+      const findUser = await User.findOne({ uid: args.userInput.uid });
+      if (findUser) return findUser;
       const user = new User({
         ...args.userInput
       });
@@ -41,7 +52,15 @@ module.exports = {
   },
   Subscription: {
     numberIncremented: {
-      subscribe: () => pubsub.asyncIterator(['NUMBER_INCREMENTED'])
+      subscribe: () => {
+        pubsub.publish('SUB_EMOJI', { subMindMessage: { emoji: '😢😢' } });
+        return pubsub.asyncIterator(['NUMBER_INCREMENTED']);
+      }
+    },
+    subMindMessage: {
+      subscribe: (args) => {
+        return pubsub.asyncIterator(['SUB_EMOJI']);
+      }
     }
   }
 };

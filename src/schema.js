@@ -4,6 +4,7 @@ const { gql } = require('apollo-server');
 const typeDefs = gql`
   type User {
     _id: String
+    uid: String!
     name: String!
   }
 
@@ -13,15 +14,22 @@ const typeDefs = gql`
     users: [User]
   }
 
+  type MindMessage {
+    emoji: String!
+  }
+
   type Query {
     currentNumber: Int
+    mindMessage: MindMessage
+    user(uid: String!): User
     users: [User]
-    user: User
     rooms: [Room]
     room: Room
   }
+
   input UserInput {
     name: String
+    uid: String
   }
   input RoomInput {
     name: String
@@ -34,6 +42,7 @@ const typeDefs = gql`
 
   type Subscription {
     numberIncremented: Int
+    subMindMessage: MindMessage
   }
 `;
 
