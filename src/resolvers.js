@@ -44,7 +44,8 @@ module.exports = {
     },
     createRoom: async (parent, args, context, info) => {
       const room = new Room({
-        ...args.roomInput
+        ...args.roomInput,
+        status: 'wait'
       });
       const result = await room.save();
       return result;

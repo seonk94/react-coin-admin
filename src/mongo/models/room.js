@@ -6,6 +6,12 @@ const roomSchema = new mongoose.Schema({
   },
   users: {
     type: Array
+  },
+  status: {
+    type: String
+  },
+  ownerUid: {
+    type: String
   }
 });
 
