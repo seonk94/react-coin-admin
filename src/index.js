@@ -1,10 +1,10 @@
-const { ApolloServer } = require("apollo-server");
-const clientConnect = require("./mongo");
-const { port } = require("./config");
+const { ApolloServer } = require('apollo-server');
+const clientConnect = require('./mongo');
+const { port } = require('./config');
 clientConnect();
 
-const typeDefs = require("./schema");
-const resolvers = require("./resolvers");
+const typeDefs = require('./schema');
+const resolvers = require('./resolvers');
 
 const server = new ApolloServer({
   typeDefs,
@@ -12,14 +12,14 @@ const server = new ApolloServer({
   introspection: true,
   playground: true,
   subscriptions: {
-    path: "/subscriptions",
+    path: '/subscriptions',
     onConnect: (connectionParams, webSocket, context) => {
-      console.log("Client connected");
+      console.log('Client connected');
     },
     onDisconnect: (webSocket, context) => {
-      console.log("Client disconnected");
-    },
-  },
+      console.log('Client disconnected');
+    }
+  }
 });
 
 server.listen({ port: port }).then(({ url }) => {

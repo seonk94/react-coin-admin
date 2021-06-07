@@ -1,19 +1,8 @@
-const { pubsub } = require("./subscriptions");
-const { User, Room } = require("./mongo/models");
-
-let currentNumber = 0;
-function incrementNumber() {
-  currentNumber++;
-  pubsub.publish("NUMBER_INCREMENTED", { numberIncremented: currentNumber });
-  setTimeout(incrementNumber, 10000);
-}
-incrementNumber();
+const { pubsub } = require('./subscriptions');
+const { User, Room } = require('./mongo/models');
 
 module.exports = {
   Query: {
-    currentNumber() {
-      return currentNumber;
-    },
     user: async (_, args) => {
       const user = await User.findOne({ uid: args.uid });
       return user;
@@ -32,16 +21,16 @@ module.exports = {
     },
     mindMessage: () => {
       return {
-        emoji: "❤",
+        emoji: '❤'
       };
-    },
+    }
   },
   Mutation: {
     createUser: async (parent, args, context, info) => {
       const findUser = await User.findOne({ uid: args.userInput.uid });
       if (findUser) return findUser;
       const user = new User({
-        ...args.userInput,
+        ...args.userInput
       });
       const result = await user.save();
       return result;
@@ -49,30 +38,22 @@ module.exports = {
     createRoom: async (parent, args, context, info) => {
       const room = new Room({
         ...args.roomInput,
-        status: "wait",
+        status: 'wait'
       });
       const result = await room.save();
       return result;
-    },
+    }
   },
   Subscription: {
-    numberIncremented: {
-      subscribe: () => {
-        pubsub.publish("SUB_EMOJI", {
-          subMindMessage: { emoji: "😢😢", _id: "_id" },
-        });
-        return pubsub.asyncIterator(["NUMBER_INCREMENTED"]);
-      },
-    },
     subMindMessage: {
       subscribe: (args) => {
-        return pubsub.asyncIterator(["SUB_EMOJI"]);
-      },
+        return pubsub.asyncIterator(['SUB_EMOJI']);
+      }
     },
     pubMindMessage: {
       subscribe: (args) => {
-        return pubsub.asyncIterator(["PUB_EMOJI"]);
-      },
-    },
-  },
+        return pubsub.asyncIterator(['PUB_EMOJI']);
+      }
+    }
+  }
 };

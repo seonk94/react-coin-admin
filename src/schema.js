@@ -1,4 +1,4 @@
-const { gql } = require("apollo-server");
+const { gql } = require('apollo-server');
 
 // Schema definition
 const typeDefs = gql`
@@ -22,7 +22,6 @@ const typeDefs = gql`
   }
 
   type Query {
-    currentNumber: Int
     mindMessage: MindMessage
     user(uid: String!): User
     users: [User]
@@ -46,7 +45,6 @@ const typeDefs = gql`
   }
 
   type Subscription {
-    numberIncremented: Int
     subMindMessage: MindMessage
     pubMindMessage: MindMessage
   }
