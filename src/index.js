@@ -1,29 +1,28 @@
-const { ApolloServer } = require('apollo-server');
-const clientConnect = require('./mongo');
-const PORT = 4000;
-
+const { ApolloServer } = require("apollo-server");
+const clientConnect = require("./mongo");
+const { port } = require("./config");
 clientConnect();
 
-const typeDefs = require('./schema');
-const resolvers = require('./resolvers');
+const typeDefs = require("./schema");
+const resolvers = require("./resolvers");
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   subscriptions: {
-    path: '/subscriptions',
+    path: "/subscriptions",
     onConnect: (connectionParams, webSocket, context) => {
-      console.log('Client connected');
+      console.log("Client connected");
     },
     onDisconnect: (webSocket, context) => {
-      console.log('Client disconnected');
-    }
-  }
+      console.log("Client disconnected");
+    },
+  },
 });
 
-server.listen().then(({ url }) => {
-  console.log(`🚀 Subscription endpoint ready at ws://localhost:${PORT}${server.subscriptionsPath}`);
+server.listen({ port: port }).then(({ url }) => {
+  console.log(
+    `🚀 Subscription endpoint ready at ws://localhost:${port}${server.subscriptionsPath}`
+  );
   console.log(`🚀 Apollo Server ready at ${url}`);
 });
-
-

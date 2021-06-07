@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server');
+const { gql } = require("apollo-server");
 
 // Schema definition
 const typeDefs = gql`
@@ -18,6 +18,7 @@ const typeDefs = gql`
 
   type MindMessage {
     emoji: String!
+    _id: String!
   }
 
   type Query {
@@ -25,8 +26,8 @@ const typeDefs = gql`
     mindMessage: MindMessage
     user(uid: String!): User
     users: [User]
+    room(_id: String!): Room
     rooms: [Room]
-    room: Room
   }
 
   input UserInput {
@@ -47,6 +48,7 @@ const typeDefs = gql`
   type Subscription {
     numberIncremented: Int
     subMindMessage: MindMessage
+    pubMindMessage: MindMessage
   }
 `;
 
