@@ -9,6 +9,8 @@ const resolvers = require("./resolvers");
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  introspection: true,
+  playground: true,
   subscriptions: {
     path: "/subscriptions",
     onConnect: (connectionParams, webSocket, context) => {
