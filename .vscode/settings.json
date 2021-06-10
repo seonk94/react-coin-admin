@@ -1,13 +1,16 @@
 {
-    "editor.formatOnSave": true,
-    "editor.tabSize": 2,
-    "[javascript]": {
-      "editor.formatOnSave": true
-    },
-    "editor.codeActionsOnSave": {
-      // For ESLint
-      "source.fixAll.eslint": true
-    },
-    "prettier.singleQuote": true,
-    "prettier.useTabs": true,
-  }
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    // For ESLint
+    "source.fixAll": true
+  },
+  "eslint.validate": [
+    "javascript",
+  ],
+  "eslint.format.enable": true,
+}
