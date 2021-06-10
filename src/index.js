@@ -1,10 +1,12 @@
-const { ApolloServer } = require('apollo-server');
-const clientConnect = require('./mongo');
-const { port } = require('./config');
-clientConnect();
+import { ApolloServer } from 'apollo-server';
+import clientConnect from './mongo/index.js';
 
-const typeDefs = require('./schema');
-const resolvers = require('./resolvers');
+import typeDefs from "./schema.js";
+import resolvers from './resolvers.js';
+
+import { PORT } from './config/index.js';
+
+clientConnect();
 
 const server = new ApolloServer({
   typeDefs,
@@ -22,9 +24,9 @@ const server = new ApolloServer({
   }
 });
 
-server.listen({ port: port }).then(({ url }) => {
+server.listen({ port: PORT }).then(({ url }) => {
   console.log(
-    `🚀 Subscription endpoint ready at ws://localhost:${port}${server.subscriptionsPath}`
+    `🚀 Subscription endpoint ready at ws://localhost:${PORT}${server.subscriptionsPath}`
   );
   console.log(`🚀 Apollo Server ready at ${url}`);
 });

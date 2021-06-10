@@ -1,7 +1,7 @@
-const { pubsub } = require('./subscriptions');
-const { User, Room } = require('./mongo/models');
+import { pubsub } from './subscriptions.js';
+import { User, Room } from './mongo/models/index.js'
 
-module.exports = {
+const resolvers = {
   Query: {
     user: async (_, args) => {
       const user = await User.findOne({ uid: args.uid });
@@ -57,3 +57,5 @@ module.exports = {
     }
   }
 };
+
+export default resolvers;

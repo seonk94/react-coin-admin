@@ -1,6 +1,6 @@
-const User = require('./user');
-const Room = require('./room');
-module.exports = {
-  User,
-  Room
-};
+import user from './user.js';
+import room from './room.js';
+
+export const User = user;
+export const Room = room;
+
