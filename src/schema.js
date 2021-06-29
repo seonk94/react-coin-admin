@@ -18,11 +18,10 @@ const typeDefs = gql`
 
 	type MindMessage {
 		emoji: String!
-		_id: String!
 	}
 
 	type Query {
-		mindMessage: MindMessage
+		postMessage(emoji: String): MindMessage
 		user(uid: String!): User
 		users: [User]
 		room(_id: String!): Room
@@ -45,7 +44,6 @@ const typeDefs = gql`
 	}
 
 	type Subscription {
-		subMindMessage: MindMessage
 		pubMindMessage: MindMessage
 	}
 `;

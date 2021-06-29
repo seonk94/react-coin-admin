@@ -19,9 +19,15 @@ const resolvers = {
 			const rooms = await Room.find();
 			return rooms;
 		},
-		mindMessage: () => {
+		postMessage: (_, args) => {
+			const payload = {
+				pubMindMessage: {
+					emoji: args.emoji
+				}
+			}
+			pubsub.publish('PUB_EMOJI', payload);
 			return {
-				emoji: '❤',
+				emoji: args.emoji || '❤',
 			};
 		},
 	},
@@ -43,13 +49,9 @@ const resolvers = {
 			const result = await room.save();
 			return result;
 		},
+
 	},
 	Subscription: {
-		subMindMessage: {
-			subscribe: (args) => {
-				return pubsub.asyncIterator(['SUB_EMOJI']);
-			},
-		},
 		pubMindMessage: {
 			subscribe: (args) => {
 				return pubsub.asyncIterator(['PUB_EMOJI']);
