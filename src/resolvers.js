@@ -19,17 +19,6 @@ const resolvers = {
 			const rooms = await Room.find();
 			return rooms;
 		},
-		postMessage: (_, args) => {
-			const payload = {
-				pubMindMessage: {
-					emoji: args.emoji
-				}
-			}
-			pubsub.publish('PUB_EMOJI', payload);
-			return {
-				emoji: args.emoji || '❤',
-			};
-		},
 	},
 	Mutation: {
 		createUser: async (parent, args, context, info) => {
@@ -49,12 +38,22 @@ const resolvers = {
 			const result = await room.save();
 			return result;
 		},
-
+		postEmojiMessage: (_, args) => {
+			const payload = {
+				subEmojiMessage: {
+					...args.postEmojiMessageInput
+				}
+			}
+			pubsub.publish('SUB_EMOJI', payload);
+			return {
+				...args.postEmojiMessageInput
+			}
+		}
 	},
 	Subscription: {
-		pubMindMessage: {
-			subscribe: (args) => {
-				return pubsub.asyncIterator(['PUB_EMOJI']);
+		subEmojiMessage: {
+			subscribe: () => {
+				return pubsub.asyncIterator(['SUB_EMOJI']);
 			},
 		},
 	},

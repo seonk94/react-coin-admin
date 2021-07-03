@@ -16,12 +16,13 @@ const typeDefs = gql`
 		ownerUser: User
 	}
 
-	type MindMessage {
-		emoji: String!
+	type EmojiMessage {
+		emoji: String
+		uid: String
+		roomId: String
 	}
 
 	type Query {
-		postMessage(emoji: String): MindMessage
 		user(uid: String!): User
 		users: [User]
 		room(_id: String!): Room
@@ -37,14 +38,20 @@ const typeDefs = gql`
 		status: String
 		ownerUser: UserInput
 	}
+	input PostEmojiMessageInput {
+		emoji: String
+		roomId: String
+		uid: String
+	}
 
 	type Mutation {
 		createUser(userInput: UserInput): User
 		createRoom(roomInput: RoomInput): Room
+		postEmojiMessage(postEmojiMessageInput: PostEmojiMessageInput): EmojiMessage
 	}
 
 	type Subscription {
-		pubMindMessage: MindMessage
+		subEmojiMessage: EmojiMessage
 	}
 `;
 
