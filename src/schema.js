@@ -13,7 +13,7 @@ const typeDefs = gql`
 		name: String!
 		status: String
 		users: [User]
-		ownerUid: String
+		ownerUser: User
 	}
 
 	type MindMessage {
@@ -34,8 +34,8 @@ const typeDefs = gql`
 	}
 	input RoomInput {
 		name: String
-		ownerUid: String
 		status: String
+		ownerUser: UserInput
 	}
 
 	type Mutation {

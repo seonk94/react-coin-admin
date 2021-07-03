@@ -44,7 +44,7 @@ const resolvers = {
 		createRoom: async (parent, args, context, info) => {
 			const room = new Room({
 				...args.roomInput,
-				status: 'wait',
+				users: [],
 			});
 			const result = await room.save();
 			return result;

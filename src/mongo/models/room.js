@@ -10,9 +10,14 @@ const roomSchema = new mongoose.Schema({
 	status: {
 		type: String,
 	},
-	ownerUid: {
-		type: String,
-	},
+	ownerUser: {
+		uid: {
+			type: String,
+		},
+		name: {
+			type: String
+		}
+	}
 });
 
 const Room = mongoose.model('Room', roomSchema);
